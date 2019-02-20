@@ -16,6 +16,7 @@ html, body {
 
 #text-container {
   margin-top: 33vh;
+  width: 60vw;
   font-size: 3em;
   text-align: left;
 }
