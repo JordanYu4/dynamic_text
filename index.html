@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles.css" >
+  </head>
+
+  <body>
+    <div id="text-container">
+      <span>So Christ himself gave the</span>
+      <span id="person">apostles</span>
+    </div>
+  </body>
+
+  <footer>
+    <script>
+      let people = ['apostles', 'prophets', 'evangelists', 'pastors', 'teachers'];
+      const target = document.getElementById("person");
+      let i = 0;
+      setInterval(() => {
+        target.innerHTML = people[i % people.length];
+        i++;
+      }, 1000);
+    </script>
+  </footer>
+</html>

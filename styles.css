@@ -1,0 +1,21 @@
+html, body {
+  margin: 0; 
+  padding: 0;
+
+}
+
+html, body {
+  font-family: 'Avenir', sans-serif;
+
+  display: flex;
+  justify-content: center;
+
+  background-color: #05111D;
+  color: #ffffff;
+}
+
+#text-container {
+  margin-top: 33vh;
+  font-size: 3em;
+  text-align: left;
+}
