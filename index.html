@@ -6,10 +6,11 @@
 
   <body>
     <div id="text-container">
-      <span>You can use</span>
+      <!-- <span>You can use</span> -->
+      <span>So Christ himself gave the</span>
       <section id="dynamic-word">
         <div id="word" class="">
-          mySQL
+          apostles
         </div>
       </section>
     </div>
@@ -21,8 +22,8 @@
 
   <footer>
     <script>
-      // let words = ['apostles', 'prophets', 'evangelists', 'pastors', 'teachers'];
-      let words = ['postgres', 'mongoDB', 'mySQL'];
+      let words = ['apostles', 'prophets', 'evangelists', 'pastors', 'teachers'];
+      // let words = ['postgres', 'mongoDB', 'mySQL'];
       const target = document.getElementById("dynamic-word");
 
       function transitionWord(node, animationType, callback) {
@@ -38,7 +39,7 @@
         node.addEventListener('animationend', handleAnimationEnd);
       }
       
-      let i = 0;
+      let i = 1;
       function fadeOutDown(node) {
         transitionWord(node, 'fadeOutDown', fadeInDown);
         node.innerHTML = `${ words[i % words.length] }`
