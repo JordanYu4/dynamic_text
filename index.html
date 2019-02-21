@@ -9,15 +9,12 @@
       <!-- <span>You can use</span> -->
       <span>So Christ himself gave the</span>
       <section id="dynamic-word">
-        <div id="word" class="">
+        <div id="word" class="animated fadeInDown">
           apostles
         </div>
       </section>
     </div>
 
-    <div class="animated slideOutUp">
-      Test animation
-    </div>
   </body>
 
   <footer>
@@ -26,31 +23,51 @@
       // let words = ['postgres', 'mongoDB', 'mySQL'];
       const target = document.getElementById("dynamic-word");
 
-      function transitionWord(node, animationType, callback) {
-        node.classList.add('animated', animationType);
+      // add entry animation 
 
-        function handleAnimationEnd() {
-          node.classList.remove('animated', animationType);
-          node.removeEventListener('animationend', handleAnimationEnd);
+      // on animation end: remove entry animation 
 
-          if (typeof callback === 'function') callback(node);
+      // add exit animation 
+
+      // on animation end: remove exit animation, switch text 
+
+      function wordFactory(arr) {
+        let idx = 1;
+        const arrLength = arr.length;
+
+        return () => {
+          const word = arr[idx % arrLength];
+          idx++;
+          return word; 
+        }
+      }
+
+      const wordGenerator = wordFactory(words);
+
+      function cycleWord(node, entryAnimation, exitAnimation) {
+        console.log('cycling word');
+        node.classList.add('animated', entryAnimation);
+
+        function handleEntryEnd() {
+          node.classList.remove('animated', entryAnimation);
+          node.removeEventListener('animationend', handleEntryEnd);
+
+          node.classList.add('animated', exitAnimation);
+
+          function handleTextChange() {
+            node.classList.remove('animated', exitAnimation);
+            node.removeEventListener('animationend', handleTextChange);
+
+            node.innerHTML = wordGenerator();
+          }
+          
+          node.addEventListener('animationend', handleTextChange);
         }
         
-        node.addEventListener('animationend', handleAnimationEnd);
-      }
-      
-      let i = 1;
-      function fadeOutDown(node) {
-        transitionWord(node, 'fadeOutDown', fadeInDown);
-        node.innerHTML = `${ words[i % words.length] }`
-        i++;
+        node.addEventListener('animationend', handleEntryEnd); 
       }
 
-      function fadeInDown(node) {
-        transitionWord(node, 'fadeInDown', fadeOutDown);
-      }
-
-      fadeInDown(target);
+      setInterval(() => { cycleWord(target, 'fadeInDown', 'fadeOutDown') }, 1000);
     </script>
   </footer>
 </html>
