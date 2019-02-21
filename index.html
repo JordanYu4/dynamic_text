@@ -23,14 +23,6 @@
       // let words = ['postgres', 'mongoDB', 'mySQL'];
       const target = document.getElementById("dynamic-word");
 
-      // add entry animation 
-
-      // on animation end: remove entry animation 
-
-      // add exit animation 
-
-      // on animation end: remove exit animation, switch text 
-
       function wordFactory(arr) {
         let idx = 1;
         const arrLength = arr.length;
@@ -43,6 +35,47 @@
       }
 
       const wordGenerator = wordFactory(words);
+
+
+      // Handling with event listeners alone is too complex when 
+      // multiple callbacks are required 
+      // Try using async and promises instead 
+      
+      function addEntry(node, entryAnimation) {
+        node.classList.add('animated', entryAnimation);
+      }
+      function removeEntry(node, entryAnimation) {
+        node.removeEventListener('animationend', removeEntry(target, 'fadeInDown'));
+        node.classList.remove('animated', entryAnimation);
+      }
+      function addExit(node, exitAnimation) {
+        node.classList.add('animated', exitAnimation);
+      }
+      function removeExit(node, exitAnimation) {
+        node.classList.remove('animated', exitAnimation);
+      }
+      function changeText(node) {
+        node.innerHTML = wordGenerator();
+      }
+      
+      while (true) {
+        target.addEventListener('animationend', removeEntry(target, 'fadeInDown'));
+
+      }
+
+      
+      // add entry animation 
+
+      // on animation end: remove entry animation 
+
+      // add exit animation 
+
+      // on animation end: remove exit animation, switch text 
+
+
+
+
+      // ================== //
 
       function cycleWord(node, entryAnimation, exitAnimation) {
         console.log('cycling word');
