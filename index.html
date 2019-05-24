@@ -8,7 +8,7 @@
     <div id="text-container">
       <!-- <span>You can use</span> -->
       <span>So Christ himself gave the</span>
-      <section id="dynamic-word">
+      <section id="dynamic-word-container">
         <div id="word" class="animated fadeInDown">
           apostles
         </div>
@@ -19,16 +19,15 @@
 
   <footer>
     <script>
-      let words = ['apostles', 'prophets', 'evangelists', 'pastors', 'teachers'];
+      const words = ['apostles', 'prophets', 'evangelists', 'pastors', 'teachers'];
       // let words = ['postgres', 'mongoDB', 'mySQL'];
-      const target = document.getElementById("dynamic-word");
+      const wordContainer = document.getElementById("dynamic-word-container");
 
       function wordFactory(arr) {
         let idx = 1;
-        const arrLength = arr.length;
 
         return () => {
-          const word = arr[idx % arrLength];
+          const word = arr[idx % arr.length];
           idx++;
           return word; 
         }
@@ -41,27 +40,27 @@
       // multiple callbacks are required 
       // Try using async and promises instead 
       
-      function addEntry(node, entryAnimation) {
-        node.classList.add('animated', entryAnimation);
-      }
-      function removeEntry(node, entryAnimation) {
-        node.removeEventListener('animationend', removeEntry(target, 'fadeInDown'));
-        node.classList.remove('animated', entryAnimation);
-      }
-      function addExit(node, exitAnimation) {
-        node.classList.add('animated', exitAnimation);
-      }
-      function removeExit(node, exitAnimation) {
-        node.classList.remove('animated', exitAnimation);
-      }
+      // function addEntry(node, entryAnimation) {
+      //   node.classList.add('animated', entryAnimation);
+      // }
+      // function removeEntry(node, entryAnimation) {
+      //   node.removeEventListener('animationend', removeEntry(wordContainer, 'fadeInDown'));
+      //   node.classList.remove('animated', entryAnimation);
+      // }
+      // function addExit(node, exitAnimation) {
+      //   node.classList.add('animated', exitAnimation);
+      // }
+      // function removeExit(node, exitAnimation) {
+      //   node.classList.remove('animated', exitAnimation);
+      // }
       function changeText(node) {
         node.innerHTML = wordGenerator();
       }
       
-      while (true) {
-        target.addEventListener('animationend', removeEntry(target, 'fadeInDown'));
+      // while (true) {
+      //   wordContainer.addEventListener('animationend', removeEntry(wordContainer, 'fadeInDown'));
 
-      }
+      // }
 
       
       // add entry animation 
@@ -73,9 +72,11 @@
       // on animation end: remove exit animation, switch text 
 
 
-
-
       // ================== //
+
+      function cycleWordSimply(node) {
+        node.innerHTML = wordGenerator();
+      }
 
       function cycleWord(node, entryAnimation, exitAnimation) {
         console.log('cycling word');
@@ -100,7 +101,8 @@
         node.addEventListener('animationend', handleEntryEnd); 
       }
 
-      setInterval(() => { cycleWord(target, 'fadeInDown', 'fadeOutDown') }, 1000);
+      // setInterval(() => { cycleWord(wordContainer, 'fadeInDown', 'fadeOutDown') }, 1000);
+      setInterval(() => { cycleWordSimply(wordContainer) }, 1500);
     </script>
   </footer>
 </html>
