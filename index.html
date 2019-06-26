@@ -1,12 +1,12 @@
 <html>
   <head>
+    <title>Dynamic text sandbox</title>
     <link rel="stylesheet" type="text/css" href="styles.css" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
   </head>
 
   <body>
     <div id="text-container">
-      <!-- <span>You can use</span> -->
       <span>So Christ himself gave the</span>
       <section id="dynamic-word-container">
         <div id="word" class="animated fadeInDown">
@@ -20,7 +20,6 @@
   <footer>
     <script>
       const words = ['apostles', 'prophets', 'evangelists', 'pastors', 'teachers'];
-      // let words = ['postgres', 'mongoDB', 'mySQL'];
       const wordContainer = document.getElementById("dynamic-word-container");
 
       function wordFactory(arr) {
